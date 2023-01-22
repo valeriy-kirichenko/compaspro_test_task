@@ -8,14 +8,34 @@ USER = 'user'
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username,  password=None):
+    """Кастомный менеджер для User."""
 
+    def create_user(self, username,  password=None):
+        """Создает пользователя.
+
+        Args:
+            username (str): имя пользователя
+            password (int, optional): пароль. По умолчанию - None.
+
+        Returns:
+            User: обьект пользователя.
+        """
         user = self.model(username=username)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self,username, password=None):
+        """Создает суперпользователя.
+
+        Args:
+            username (str): имя пользователя
+            password (int, optional): пароль. По умолчанию - None.
+
+        Returns:
+            User: обьект пользователя.
+        """
+
         user = self.create_user(
             username,
             password=password,
@@ -65,16 +85,25 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'username'
 
     def __str__(self):
+        """Строковое представление модели."""
+
         return self.username
 
     def has_perm(self, perm, obj=None):
+        """Проверяет есть ли у пользователя определенное разрешение."""
+
         return True
 
     def has_module_perms(self, app_label):
+        """Проверяет есть ли у пользователя разрешения на просмотр 
+        приложения."""
+
         return True
 
     @property
     def is_staff(self):
+        """Проверяет является ли пользователь администратором."""
+
         return self.is_admin
 
     class Meta:
