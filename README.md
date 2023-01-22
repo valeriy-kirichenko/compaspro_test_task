@@ -8,7 +8,7 @@ git clone 'git@github.com:valeriy-kirichenko/compaspro_test_task.git'
 ```
 2. Переместитесь в папку /infra, создайте там файл .env и заполните его данными:
 ```bash
-cd infra/
+cd compaspro_test_task/test_task/infra/
 touch .env
 nano .env
 ... # .env
